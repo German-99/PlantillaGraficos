@@ -13,6 +13,77 @@
 
 using namespace std;
 
+void dibujaPoligono() {
+	glBegin(GL_POLYGON);
+
+	glColor3f(0.4f, 0.4f, 1.0f);
+
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.5f, 0.0f);
+	glVertex3f(0.2f, 0.3f, 0.0f);
+	glVertex3f(0.6f, -0.4f, 0.0f);
+	glVertex3f(0.4f, -0.6f, 0.0f);
+
+	glEnd();
+}
+
+void dibujarTrianguloContinuo() {
+	glBegin(GL_TRIANGLE_STRIP);
+
+	glColor3f(1.0f, 1.0f, 1.0f);
+
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.1f, 0.1f, 0.0f);
+	glVertex3f(0.2f, 0.0f, 0.0f);
+
+	glEnd();
+}
+
+
+void dibujarLineaContinua() {
+	glBegin(GL_LINE_STRIP);
+	glColor3f(0.1f, 0.3f, 0.75f);
+
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.2f, 0.0f);
+
+	glVertex3f(0.4f, 0.2f, 0.0f);
+	glVertex3f(0.2f, 0.3f, 0.0f);
+	glEnd();
+}
+
+void dibujarLineas() {
+	glBegin(GL_LINES);
+	glColor3f(1.0f, 0.4f, 0.6f);
+
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.2f, -0.4f, 0.0f);
+
+	glVertex3f(0.3f, -0.4f, 0.0f);
+	glEnd();
+}
+
+void dibujarTriangulos() {
+	//Establecemos el tipo de primitiva
+	glBegin(GL_TRIANGLES);
+
+	glColor3f(1.0f, 0.0f, 0.0f);
+	//Enviar vertices
+	glVertex3f(-0.7f, 0.7f, 0.0f);
+	glVertex3f(-0.7f, -0.7f, 0.0f);
+	glVertex3f(0.7f, -0.7f, 0.0f);
+
+	glVertex3f(0.7f, 0.7f, 0.0f);
+	glVertex3f(0.7f, -0.7f, 0.0f);
+	glVertex3f(-0.7f, 0.7f, 0.0f);
+
+	//Especificar que dejaremos de dibujar
+	glEnd();
+}
+void dibujar() {
+
+	dibujaPoligono();
+}
 
 int main()
 {
@@ -27,7 +98,7 @@ int main()
 	// si se pudo iniciar GLFW
 	//Inicalizamos la ventana
 
-	window = glfwCreateWindow(800, 600, "Ventana", NULL, NULL);
+	window = glfwCreateWindow(600, 600, "Ventana", NULL, NULL);
 
 	// si no se pudo crear la ventana
 	// terminamos ejecucuon
@@ -53,13 +124,17 @@ int main()
 	//Ciclo de dibujo (Draw loop)
 	while (!glfwWindowShouldClose(window)) {
 		//Establecer region de dibujo
-		glViewport(0, 0, 800, 600);
+		glViewport(0, 0, 600, 600);
 		//Establecer el color de borrado
 		glClearColor(1, 0.8, 0, 1);
 		//Borrar!
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		//actualizar valores y dibujar
+		dibujar();
+
+
+		glfwPollEvents();
 		glfwSwapBuffers(window);
 	}
 	//Despúes del ciclo de dibujo
